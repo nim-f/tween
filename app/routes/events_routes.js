@@ -7,7 +7,6 @@ const Counters       = mongoose.model('Counters');
 
 router.get('/events/:id', (req, res) => {
   const { id }  = req.params
-  console.log('id', id)
   Events.findOne({id: parseInt(id)}, function(err, result) {
     if (err) {
       res.send({ 'error': 'An error has occurred' });
@@ -31,7 +30,7 @@ router.post('/events/:id', (req, res) => {
   const { id }  = req.params
   const event = req.body
   Events.updateOne({id}, event, function(err, numberAffected, rawResponse) {
-    res.send({event: numberAffected.nModified});
+    res.send(event);
   })
 })
 
@@ -43,8 +42,12 @@ router.post('/events', (req, res) => {
     (err, nextId) => {
       event.id = nextId.value
       const finalEvent = new Events(event);
+
       return finalEvent.save()
-      .then(() => res.json(finalEvent));
+      .then(() => {
+        res.json(finalEvent)
+      });
+
     }
   )
 });

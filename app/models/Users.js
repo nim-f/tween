@@ -13,6 +13,7 @@ const UsersSchema = new Schema({
   hash: String,
   salt: String,
 });
+UsersSchema.index({first_name: 'text', last_name: 'text'});
 
 UsersSchema.methods.setPassword = function(password) {
   this.salt = crypto.randomBytes(16).toString('hex');

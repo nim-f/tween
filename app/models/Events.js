@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
+const FieldSchema = new Schema({
+  type: Number,
+  name: String,
+  value: String,
+  is_required: Boolean,
+})
+
 const EventSchema = new Schema({
   title: {
     value: String,
@@ -38,9 +45,18 @@ const EventSchema = new Schema({
     value: String,
     updated_by: String,
   },
-  customFields: Array,
-  managerId: Number,
+  customFields: [{
+    category: Number,
+    name: String,
+    value: String,
+  }],
+  managerId: {
+    value: Number,
+    updated_by: String,
+  },
   teamIds: Array,
   id: Number,
+  createdAt: { type : Date},
+  updatedAt: { type : Date },
 });
 mongoose.model('Events', EventSchema);
