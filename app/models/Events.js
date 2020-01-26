@@ -54,9 +54,12 @@ const EventSchema = new Schema({
     value: Number,
     updated_by: String,
   },
-  teamIds: Array,
+  teamIds: {
+    value: Array,
+    updated_by: String,
+  },
   id: Number,
-  createdAt: { type : Date},
-  updatedAt: { type : Date },
+  createdAt: Date,
+  updatedAt: Date,
 });
 mongoose.model('Events', EventSchema);

@@ -28,6 +28,7 @@ mongoose.set('debug', true);
 require('./app/models/Users');
 require('./app/models/Counters');
 require('./app/models/Events');
+require('./app/models/Attendees');
 require('./config/passport');
 require('./app/routes')(app)
 //Error handlers & middlewares
